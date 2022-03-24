@@ -29,11 +29,17 @@ cache_sigs = {
 
 
 def code_fetch(address, network="mainnet"):
-    assert (
-        network == "mainnet"
-    ), "only mainnet supported, but you can set WEB3_PROVIDER_URI to whatever node you want on whatever network"
+    # assert (
+    #     network == "mainnet"
+    # ), "only mainnet supported, but you can set WEB3_PROVIDER_URI to whatever node you want on whatever network"
 
-    from web3.auto import w3
+    # from web3.auto import w3
+
+    from web3 import Web3
+    url = "https://bsc-dataseed.binance.org/"
+
+    http_provider=Web3.HTTPProvider(endpoint_uri=url, request_kwargs={'timeout': 60})
+    w3 = Web3(http_provider)
 
     code = w3.eth.getCode(address).hex()[2:]
 
